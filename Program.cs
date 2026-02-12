@@ -11,8 +11,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // 🔹 Database
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite("Data Source=app.db"));
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (string.IsNullOrEmpty(connectionString))
+{
+    // Fallback to SQLite for local development
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlite("Data Source=app.db"));
+}
+else
+{
+    // Use SQL Server for Azure deployment
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(connectionString));
+}
 
 // 🔹 CORS (for React later)
 builder.Services.AddCors(options =>
