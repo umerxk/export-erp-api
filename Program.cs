@@ -12,18 +12,14 @@ builder.Services.AddSwaggerGen();
 
 // 🔹 Database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-if (string.IsNullOrEmpty(connectionString))
+if (string.IsNullOrWhiteSpace(connectionString))
 {
-    // Fallback to SQLite for local development
-    builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlite("Data Source=app.db"));
+    throw new InvalidOperationException(
+        "PostgreSQL connection string is missing. Set ConnectionStrings:DefaultConnection.");
 }
-else
-{
-    // Use SQL Server for Azure deployment
-    builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(connectionString));
-}
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 // 🔹 CORS (for React later)
 builder.Services.AddCors(options =>
@@ -37,16 +33,15 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// 🔹 Swagger UI
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Keep Swagger available in Azure for quick verification.
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // app.UseHttpsRedirection(); // keep off for now
 
 app.UseCors("AllowFrontend");
+
+app.MapGet("/", () => Results.Ok(new { status = "ok", service = "export-erp-api" }));
 
 // 🔹 Enable Controllers
 app.MapControllers();

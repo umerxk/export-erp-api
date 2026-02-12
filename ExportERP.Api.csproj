@@ -13,9 +13,7 @@
     <Compile Include="Controllers/ProductsController.cs" />
     <Compile Include="Data/AppDbContext.cs" />
     <Compile Include="Enteties/Product.cs" />
-    <Compile Include="Migrations/20260212155352_InitialCreate.cs" />
-    <Compile Include="Migrations/20260212155352_InitialCreate.Designer.cs" />
-    <Compile Include="Migrations/AppDbContextModelSnapshot.cs" />
+    <Compile Include="Migrations/*.cs" />
     <None Include="appsettings.json" />
     <None Include="appsettings.Development.json" />
     <None Include="Properties/launchSettings.json" />
@@ -27,8 +25,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
