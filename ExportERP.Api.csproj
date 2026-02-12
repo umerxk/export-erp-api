@@ -4,10 +4,21 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="**/*.resx" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Controllers/ProductsController.cs" />
+    <Compile Include="Data/AppDbContext.cs" />
+    <Compile Include="Enteties/Product.cs" />
+    <Compile Include="Migrations/20260212155352_InitialCreate.cs" />
+    <Compile Include="Migrations/20260212155352_InitialCreate.Designer.cs" />
+    <Compile Include="Migrations/AppDbContextModelSnapshot.cs" />
+    <None Include="appsettings.json" />
+    <None Include="appsettings.Development.json" />
+    <None Include="Properties/launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
