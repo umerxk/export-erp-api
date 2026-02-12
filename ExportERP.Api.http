@@ -1,0 +1,6 @@
+@ExportERP.Api_HostAddress = http://localhost:5082
+
+GET {{ExportERP.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
